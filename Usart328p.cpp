@@ -176,4 +176,3 @@ ISR(USART_RX_vect, ISR_BLOCK)
     UCSR0B &= ~_BV(RXCIE0);
 }
 
-// Usart328p usart;

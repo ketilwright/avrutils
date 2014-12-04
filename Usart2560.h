@@ -40,5 +40,3 @@ public:
     uint8_t write(uint8_t *data, uint8_t length);
     uint8_t available();
 }; 
-
-// extern Usart2560 usart;

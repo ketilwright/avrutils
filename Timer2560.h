@@ -23,17 +23,14 @@
 
 class Timer2560
 {
-    
-public:
+    public:
     volatile uint32_t m_millis;
     typedef void (*timerCallback)(void*);
     timerCallback m_cb;
     void *m_ctx;
-
 	Timer2560();
     void init(void *ctx, timerCallback callback);
     uint32_t millis() const;
     void reset();
     void isr();
 }; 
-//extern Timer2560 timer;

@@ -175,5 +175,3 @@ ISR(USART0_RX_vect, ISR_BLOCK)
     // clear interrupting condition
     UCSR0B &= ~_BV(RXCIE0);
 }
-
-//Usart2560 usart;
