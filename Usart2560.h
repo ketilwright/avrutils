@@ -41,4 +41,4 @@ public:
     uint8_t available();
 }; 
 
-extern Usart2560 usart;
+// extern Usart2560 usart;

@@ -21,11 +21,7 @@
 #if defined NDEBUG
 #else
 	#include "debug.h"
-	#if defined __AVR_ATmega328P__
-		#include "Usart328p.h"
-	#elif defined __AVR_ATmega2560__
-		#include "Usart2560.h"
-	#endif
+    #include "Usart.h"
 	#include <stdarg.h>
 	#include <stdio.h>
 	#include <string.h>

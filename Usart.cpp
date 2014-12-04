@@ -1,7 +1,7 @@
-/* 
-* Timer328p.h
+/*
+* Usart.cpp
 *
-* Created: 7/14/2014 4:12:26 PM
+* Created: 12/04/2014 1:42:00 PM
 * Author: Ketil Wright
 *
 * This program is free software: you can redistribute it and/or modify
@@ -18,22 +18,16 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
+
+#include "Usart.h"
 #include <stdint.h>
+#if defined __AVR_ATmega328P__
+    #include "Usart328p.cpp"
+#elif defined __AVR_ATmega2560__
+    #include "Usart2560.cpp"
+#endif
 
-class Timer2560
-{
-    
-public:
-    volatile uint32_t m_millis;
-    typedef void (*timerCallback)(void*);
-    timerCallback m_cb;
-    void *m_ctx;
+Usart<UsartImpl> usart;
 
-	Timer2560();
-    void init(void *ctx, timerCallback callback);
-    uint32_t millis() const;
-    void reset();
-    void isr();
-}; 
-//extern Timer2560 timer;
+
+

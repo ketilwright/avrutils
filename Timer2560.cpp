@@ -161,12 +161,17 @@ void Timer2560::reset()
 {
     m_millis = 0;
 }
+void Timer2560::isr()
+{
+    m_millis++;
+    if(m_cb) m_cb(m_ctx);
+    
+}
 
-Timer2560 timer;
+
 
 // Timer1 compare A interrupt handler
 ISR(TIMER1_COMPA_vect) //.., ISR_BLOCK)
 {
-    ++timer.m_millis;
-    if(timer.m_cb) timer.m_cb(timer.m_ctx);
+    timer.isr();
 }

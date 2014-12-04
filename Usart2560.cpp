@@ -176,4 +176,4 @@ ISR(USART0_RX_vect, ISR_BLOCK)
     UCSR0B &= ~_BV(RXCIE0);
 }
 
-Usart2560 usart;
+//Usart2560 usart;

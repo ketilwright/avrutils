@@ -161,11 +161,19 @@ void Timer328p::reset()
     m_millis = 0;
 }
 
-Timer328p timer;
+void Timer328p::isr()
+{
+    ++m_millis;
+    if(m_cb) m_cb(m_ctx);
+}
+
+// Timer328p timer;
+#include "Timer.h"
 
 // Timer1 compare A interrupt handler
 ISR(TIMER1_COMPA_vect) //.., ISR_BLOCK)
 {
-    ++timer.m_millis;
-    if(timer.m_cb) timer.m_cb(timer.m_ctx);
+    timer.isr();
+    //++timer.m_millis;
+    //if(timer.m_cb) timer.m_cb(timer.m_ctx);
 }

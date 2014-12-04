@@ -36,7 +36,7 @@ static RingBuffer<127> g_rx;
 
 static const uint16_t ubrr =  ((F_CPU / (BAUDRATE * 16UL))) - 1;
 
-Usart2560::Usart2560()
+Usart328p::Usart328p()
 {
     g_tx.reset();
     g_rx.reset();
@@ -46,7 +46,7 @@ Usart2560::Usart2560()
 // and interrupts enabled on receive and
 // data register empty.
 // 
-void Usart2560::begin()
+void Usart328p::begin()
 {
     //
     // USART power reduction off.
@@ -88,7 +88,7 @@ void Usart2560::begin()
 // Pull a single byte from the g_rx ring buffer.
 // returns true if a byte was available.
 //
-bool Usart2560::read(uint8_t *data)
+bool Usart328p::read(uint8_t *data)
 {
     bool retVal = false;
     ATOMIC_BLOCK(ATOMIC_FORCEON)
@@ -106,7 +106,7 @@ bool Usart2560::read(uint8_t *data)
 // fires, the byte will be written to the output
 // data buffer (UDR0).
 //
-bool Usart2560::write(uint8_t data)
+bool Usart328p::write(uint8_t data)
 {
     bool retVal= false;
     ATOMIC_BLOCK(ATOMIC_FORCEON)
@@ -129,7 +129,7 @@ bool Usart2560::write(uint8_t data)
 // data buffer (UDR0).
 //
 
-uint8_t Usart2560::write(uint8_t *data, uint8_t length)
+uint8_t Usart328p::write(uint8_t *data, uint8_t length)
 {
    uint8_t bytesWritten = 0;
    ATOMIC_BLOCK(ATOMIC_FORCEON)
@@ -176,4 +176,4 @@ ISR(USART_RX_vect, ISR_BLOCK)
     UCSR0B &= ~_BV(RXCIE0);
 }
 
-Usart2560 usart;
+// Usart328p usart;

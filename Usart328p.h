@@ -21,10 +21,10 @@
 
 #pragma once
 #include <stdint.h>
-class Usart2560
+class Usart328p
 {
 public:
-	Usart2560();
+	Usart328p();
     // initializes USART0 with g_rx/g_tx enabled
     // and interrupts enabled on receive and
     // data register empty.
@@ -41,4 +41,4 @@ public:
     uint8_t available();
 }; 
 
-extern Usart2560 usart;
+//extern Usart328p usart;

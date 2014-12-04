@@ -34,5 +34,6 @@ public:
     void init(void *ctx, timerCallback callback);
     uint32_t millis() const;
     void reset();
+    void isr();
 }; 
-extern Timer328p timer;
+// extern Timer328p timer;

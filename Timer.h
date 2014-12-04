@@ -1,7 +1,7 @@
 /* 
-* Timer328p.h
+* Timer.h
 *
-* Created: 7/14/2014 4:12:26 PM
+* Created: 12/04/2014 1:42 PM
 * Author: Ketil Wright
 *
 * This program is free software: you can redistribute it and/or modify
@@ -21,19 +21,25 @@
 #pragma once
 #include <stdint.h>
 
-class Timer2560
-{
-    
-public:
-    volatile uint32_t m_millis;
-    typedef void (*timerCallback)(void*);
-    timerCallback m_cb;
-    void *m_ctx;
+#if defined __AVR_ATmega328P__
+    #include "Timer328p.h"
+    typedef Timer328p TimerImpl;
+#elif defined __AVR_ATmega2560__
+    #include "Timer2560.h"
+    typedef Timer2560 TimerImpl;
+#endif
 
-	Timer2560();
-    void init(void *ctx, timerCallback callback);
-    uint32_t millis() const;
-    void reset();
-    void isr();
+template<typename McuImpl>
+class Timer
+{
+    McuImpl m_impl;
+public:
+    typedef void (*timerCallback)(void*);
+	Timer(){}
+    void init(void *ctx, timerCallback callback) { m_impl.init(ctx, callback);}
+    uint32_t millis() const { return m_impl.millis(); }
+    void reset() { m_impl.reset(); }
+    void isr() { m_impl.isr(); }        
 }; 
-//extern Timer2560 timer;
+
+extern Timer<TimerImpl> timer;
